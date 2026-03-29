@@ -1,0 +1,19 @@
+{
+  "threshold": 0.9,
+  "accuracy": 0.9145299145299145,
+  "f1": 0.9246231155778893,
+  "samples": 1755,
+  "positive_samples": 551,
+  "split_mode": "time",
+  "runtime_threshold": 0.47500000000000003,
+  "runtime_calibration": {
+    "updatedAt": "2026-03-29T09:56:15.340344Z",
+    "windows": 500,
+    "positive_windows": 300,
+    "f1": 0.9216589861751151,
+    "precision": 0.8547008547008547,
+    "recall": 1.0,
+    "raw_best_threshold": 0.47500000000000003,
+    "min_threshold": 0.1
+  }
+}

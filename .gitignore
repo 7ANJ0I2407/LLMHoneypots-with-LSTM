@@ -2,9 +2,3 @@ node_modules/
 .venv/
 __pycache__/
 *.pyc
-logs/*.jsonl
-logs/*.json
-logs/*.log
-data/*.npz
-models/*.pt
-models/*.json
