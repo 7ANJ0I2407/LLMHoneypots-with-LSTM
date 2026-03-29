@@ -1,0 +1,33 @@
+{
+  "name": "honeypot",
+  "version": "1.0.0",
+  "description": "LLM honeypot with sequential attack detection using LSTM",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "tasks": "bash scripts/task_runner.sh",
+    "setup:py": "python3 -m venv .venv && ./.venv/bin/python -m pip install --upgrade pip && ./.venv/bin/python -m pip install -r requirements.txt",
+    "seed": "node scripts/e2e_demo.js --seed-only",
+    "trigger:lstm": "node scripts/trigger_lstm.js",
+    "trigger:detect": "node scripts/trigger_lstm.js --count 24 --mode attack && npm run detect && tail -n 10 logs/alerts.jsonl",
+    "alerts:current": "node scripts/show_current_session_alerts.js",
+    "risk:timeline": "./.venv/bin/python scripts/live_risk_timeline.py",
+    "calibrate:runtime": "./.venv/bin/python scripts/calibrate_runtime_threshold.py",
+    "gate:session": "./.venv/bin/python scripts/session_gate_report.py",
+    "preprocess": "./.venv/bin/python scripts/preprocess.py",
+    "train": "./.venv/bin/python scripts/train_lstm.py",
+    "detect": "./.venv/bin/python scripts/detect_from_log.py",
+    "validate": "./.venv/bin/python scripts/validate_run.py",
+    "pipeline": "npm run preprocess && npm run train && npm run detect",
+    "demo:e2e": "node scripts/e2e_demo.js",
+    "demo:large": "node scripts/e2e_demo.js --scale 5",
+    "report:refresh": "npm run demo:large && npm run calibrate:runtime && npm run validate && bash scripts/task_runner.sh trigger --count 25 --mode adaptive && npm run detect && npm run gate:session"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
