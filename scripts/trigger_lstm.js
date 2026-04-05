@@ -30,8 +30,8 @@ function parseArgs(argv) {
     }
   }
 
-  if (!Number.isFinite(out.count) || out.count < 20 || out.count > 30) {
-    throw new Error("--count must be between 20 and 30");
+  if (!Number.isFinite(out.count) || out.count < 20 || out.count > 100) {
+    throw new Error("--count must be between 20 and 100");
   }
 
   if (!["attack", "mixed", "adaptive"].includes(out.mode)) {
@@ -93,13 +93,33 @@ function getPrompt(index, mode) {
   return attackPrompts[index % attackPrompts.length];
 }
 
-function buildPayload(content, mode, index) {
+function isAttackRequest(mode, index) {
+  if (mode === "attack") {
+    return true;
+  }
+  if (mode === "mixed") {
+    return index % 5 !== 0;
+  }
+  if (mode === "adaptive") {
+    if (index <= 6) {
+      return false;
+    }
+    if (index <= 12) {
+      return index % 3 === 0;
+    }
+    return true;
+  }
+  return true;
+}
+
+function buildPayload(content, mode, index, isAttack) {
   const aggressive = mode === "attack" || (mode === "adaptive" && index > 12);
   return {
     model: "gpt-4o-mini",
     messages: [{ role: "user", content }],
     temperature: aggressive ? 1.0 : 0.7,
     max_tokens: aggressive ? 900 : 240,
+    label: isAttack ? "attack" : "benign",
   };
 }
 
@@ -142,7 +162,8 @@ async function main() {
 
     for (let i = 1; i <= args.count; i += 1) {
       const prompt = getPrompt(i, args.mode);
-      const payload = buildPayload(prompt, args.mode, i);
+      const isAttack = isAttackRequest(args.mode, i);
+      const payload = buildPayload(prompt, args.mode, i, isAttack);
       await sendOne(args.baseUrl, sessionHeaders, payload, i, args.count);
       if (i % 5 === 0 || i === args.count) {
         console.log(`[trigger] sent ${i}/${args.count}`);

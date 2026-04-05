@@ -1,0 +1,41 @@
+{
+  "dataset": "data/sequences_large.npz",
+  "samples_total": 42621,
+  "samples_test": 8524,
+  "thresholds": {
+    "runtime_threshold": 0.8986052631578947,
+    "runtime_novelty_threshold": 0.1126788854598999,
+    "blend_alpha": 0.5,
+    "blend_threshold_used": 0.44499999999999995
+  },
+  "tuning": {
+    "enabled": true,
+    "tune_samples": 8524,
+    "max_benign_fpr": 0.03,
+    "best_tune_metrics": {
+      "threshold": 0.44499999999999995,
+      "tp": 4620,
+      "tn": 3564,
+      "fp": 40,
+      "fn": 300,
+      "accuracy": 0.9601126231816048,
+      "precision": 0.9914163090128756,
+      "recall": 0.9390243902439024,
+      "f1": 0.9645093945720251,
+      "benign_fpr": 0.011098779134295227
+    }
+  },
+  "or_mode": null,
+  "or_mode_deprecated": null,
+  "blend_mode": {
+    "tp": 7969,
+    "tn": 155,
+    "fp": 400,
+    "fn": 0,
+    "accuracy": 0.9530736743312999,
+    "precision": 0.9522045644640936,
+    "recall": 1.0,
+    "f1": 0.9755171991675847,
+    "benign_fpr": 0.7207207207207207
+  }
+}

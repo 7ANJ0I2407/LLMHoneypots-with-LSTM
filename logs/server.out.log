@@ -1,1 +1,6 @@
-[honeypot] listening on port 8080
+ * Serving Flask app 'scorer_server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [05/Apr/2026 03:00:35] "GET /health HTTP/1.1" 200 -

@@ -1,0 +1,62 @@
+{
+  "dataset_samples": 42621,
+  "positive_ratio": 0.36974730766523545,
+  "variants": [
+    {
+      "threshold": 0.05,
+      "score_mean": 0.447927325963974,
+      "score_std": 0.4403064250946045,
+      "tp": 5780,
+      "tn": 555,
+      "fp": 0,
+      "fn": 2190,
+      "accuracy": 0.743108504398827,
+      "precision": 1.0,
+      "recall": 0.7252195734002509,
+      "f1": 0.8407272727272727,
+      "variant": "rule_only"
+    },
+    {
+      "threshold": 0.73,
+      "score_mean": 0.9423839449882507,
+      "score_std": 0.21485115587711334,
+      "tp": 7958,
+      "tn": 520,
+      "fp": 35,
+      "fn": 12,
+      "accuracy": 0.9944868035190616,
+      "precision": 0.9956211685224572,
+      "recall": 0.9984943538268507,
+      "f1": 0.9970556912860992,
+      "variant": "lstm_only"
+    },
+    {
+      "variant": "full_system",
+      "mode": "blend",
+      "threshold_lstm": null,
+      "threshold_novelty": 0.037064142525196075,
+      "alpha": 0.6,
+      "blend_threshold": 0.59,
+      "lstm_score_mean": 0.9412993788719177,
+      "novelty_error_mean": 0.025533601641654968,
+      "tp": 7954,
+      "tn": 542,
+      "fp": 13,
+      "fn": 16,
+      "accuracy": 0.9965982404692082,
+      "precision": 0.998368269110079,
+      "recall": 0.9979924717691343,
+      "f1": 0.9981803350693356,
+      "benign_fpr": 0.023423423423423424,
+      "max_benign_fpr": 0.03,
+      "constraint_satisfied": true
+    }
+  ],
+  "paper_target": {
+    "target_lift": 0.015,
+    "max_benign_fpr": 0.03,
+    "achieved_lift": 0.001124643783236401,
+    "full_system_benign_fpr": 0.023423423423423424,
+    "met": false
+  }
+}

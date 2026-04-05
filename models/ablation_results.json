@@ -1,0 +1,76 @@
+{
+  "dataset_samples": 48220,
+  "positive_ratio": 0.3010161758606387,
+  "variants": [
+    {
+      "threshold": 0.05,
+      "score_mean": 0.1395576000213623,
+      "score_std": 0.2427842766046524,
+      "tp": 3577,
+      "tn": 3178,
+      "fp": 1968,
+      "fn": 921,
+      "accuracy": 0.7004355039402738,
+      "precision": 0.6450856627592425,
+      "recall": 0.7952423299244108,
+      "f1": 0.712336951110226,
+      "variant": "rule_only"
+    },
+    {
+      "threshold": 0.7649999999999999,
+      "score_mean": 0.6424626708030701,
+      "score_std": 0.32450371980667114,
+      "tp": 4203,
+      "tn": 3982,
+      "fp": 1164,
+      "fn": 295,
+      "accuracy": 0.848714226462049,
+      "precision": 0.7831190609278926,
+      "recall": 0.934415295686972,
+      "f1": 0.8521033958438925,
+      "variant": "lstm_only"
+    },
+    {
+      "threshold": 0.8649999999999999,
+      "score_mean": 0.6057747006416321,
+      "score_std": 0.3836992383003235,
+      "tp": 4194,
+      "tn": 4557,
+      "fp": 589,
+      "fn": 304,
+      "accuracy": 0.9074035669846536,
+      "precision": 0.8768555300020907,
+      "recall": 0.9324144064028457,
+      "f1": 0.9037819200517186,
+      "variant": "lstm_sbert_only"
+    },
+    {
+      "variant": "full_system",
+      "mode": "blend",
+      "threshold_lstm": null,
+      "threshold_novelty": 0.07522542774677277,
+      "alpha": 0.5,
+      "blend_threshold": 0.5499999999999999,
+      "lstm_score_mean": 0.6057476997375488,
+      "novelty_error_mean": 0.028572440147399902,
+      "tp": 4218,
+      "tn": 4669,
+      "fp": 477,
+      "fn": 280,
+      "accuracy": 0.921505599336375,
+      "precision": 0.8984025559105431,
+      "recall": 0.9377501111605158,
+      "f1": 0.9176547373001196,
+      "benign_fpr": 0.09269335406140691,
+      "max_benign_fpr": 1.0,
+      "constraint_satisfied": true
+    }
+  ],
+  "paper_target": {
+    "target_lift": 0.015,
+    "max_benign_fpr": 1.0,
+    "achieved_lift": 0.013872817248400948,
+    "full_system_benign_fpr": 0.09269335406140691,
+    "met": false
+  }
+}

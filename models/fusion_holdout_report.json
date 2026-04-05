@@ -1,0 +1,57 @@
+{
+  "dataset": "data/sequences.npz",
+  "samples_total": 1755,
+  "samples_test": 351,
+  "thresholds": {
+    "runtime_threshold": 0.1,
+    "runtime_novelty_threshold": 1.1722218990325928,
+    "blend_alpha": 0.5,
+    "blend_threshold_used": 0.83
+  },
+  "tuning": {
+    "enabled": true,
+    "tune_samples": 351,
+    "max_benign_fpr": 0.03,
+    "best_tune_metrics": {
+      "threshold": 0.83,
+      "tp": 41,
+      "tn": 67,
+      "fp": 2,
+      "fn": 241,
+      "accuracy": 0.3076923076923077,
+      "precision": 0.9534883720930233,
+      "recall": 0.1453900709219858,
+      "f1": 0.25230769230769223,
+      "benign_fpr": 0.028985507246376812
+    }
+  },
+  "or_mode": {
+    "tp": 175,
+    "tn": 159,
+    "fp": 10,
+    "fn": 7,
+    "accuracy": 0.9515669515669516,
+    "precision": 0.9459459459459459,
+    "recall": 0.9615384615384616,
+    "f1": 0.9536784741144414,
+    "benign_fpr": 0.05917159763313609
+  },
+  "blend_mode": {
+    "tp": 164,
+    "tn": 165,
+    "fp": 4,
+    "fn": 18,
+    "accuracy": 0.9373219373219374,
+    "precision": 0.9761904761904762,
+    "recall": 0.9010989010989011,
+    "f1": 0.937142857142857,
+    "benign_fpr": 0.023668639053254437
+  },
+  "delta_blend_minus_or": {
+    "accuracy": -0.014245014245014231,
+    "precision": 0.03024453024453022,
+    "recall": -0.06043956043956045,
+    "f1": -0.016535616971584344,
+    "benign_fpr": -0.03550295857988166
+  }
+}

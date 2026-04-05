@@ -62,7 +62,7 @@ ensure_server() {
   fi
 
   echo "[tasks] server not running, starting it in background..."
-  node src/server.js > logs/server.out.log 2>&1 &
+  ./.venv/bin/python scripts/scorer_server.py > logs/server.out.log 2>&1 &
   SERVER_PID=$!
   SERVER_STARTED_BY_RUNNER=1
 

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { publish } = require("./eventBus");
 
 const LOG_DIR = path.join(__dirname, "..", "logs");
 const RAW_LOG_PATH = path.join(LOG_DIR, "raw_events.jsonl");
@@ -18,10 +19,12 @@ function appendJsonLine(filePath, payload) {
 
 function logEvent(event) {
   appendJsonLine(RAW_LOG_PATH, event);
+  publish("raw_event", event);
 }
 
 function logAlert(alert) {
   appendJsonLine(ALERT_LOG_PATH, alert);
+  publish("alert", alert);
 }
 
 module.exports = {

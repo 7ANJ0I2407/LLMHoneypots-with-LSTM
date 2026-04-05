@@ -37,6 +37,14 @@ function buildSessionId(ip, userAgent) {
     .slice(0, 16);
 }
 
+function normalizeLabel(value) {
+  const raw = String(value || "").trim().toLowerCase();
+  if (raw === "attack" || raw === "benign") {
+    return raw;
+  }
+  return "unlabeled";
+}
+
 function attackSignalScore(promptText) {
   let score = 0;
   const hits = [];
@@ -66,7 +74,24 @@ function attackSignalScore(promptText) {
   return { score, hits };
 }
 
-function buildEventRecord(req, body, replyText, latencyMs) {
+function shannonEntropy(text) {
+  if (!text) {
+    return 0;
+  }
+  const counts = new Map();
+  for (const ch of text) {
+    counts.set(ch, (counts.get(ch) || 0) + 1);
+  }
+  const total = text.length;
+  let entropy = 0;
+  counts.forEach((count) => {
+    const p = count / total;
+    entropy -= p * Math.log2(p);
+  });
+  return entropy;
+}
+
+function buildEventRecord(req, body, replyText, latencyMs, sessionFeatures = {}) {
   const timestamp = new Date().toISOString();
   const ip = getClientIp(req);
   const userAgent = req.headers["user-agent"] || "unknown";
@@ -75,6 +100,14 @@ function buildEventRecord(req, body, replyText, latencyMs) {
   const promptText = getPromptText(messages);
 
   const { score: signalScore, hits: signalHits } = attackSignalScore(promptText);
+  const label = normalizeLabel(req?.headers?.["x-honeypot-label"] || body?.label);
+  const promptCharEntropy = shannonEntropy(promptText);
+  const promptSimilarityToSessionMean = Number.isFinite(sessionFeatures.promptSimilarityToSessionMean)
+    ? Number(sessionFeatures.promptSimilarityToSessionMean)
+    : 0;
+  const distinctModelsInWindow = Number.isFinite(sessionFeatures.distinctModelsInWindow)
+    ? Number(sessionFeatures.distinctModelsInWindow)
+    : (body?.model ? 1 : 0);
 
   return {
     timestamp,
@@ -84,6 +117,7 @@ function buildEventRecord(req, body, replyText, latencyMs) {
     endpoint: req.path,
     method: req.method,
     model: body?.model || "unknown",
+    label,
     messageCount: messages.length,
     promptLength: promptText.length,
     temperature: Number.isFinite(body?.temperature)
@@ -95,6 +129,10 @@ function buildEventRecord(req, body, replyText, latencyMs) {
     latencyMs,
     signalScore,
     signalHits,
+    promptCharEntropy,
+    promptSimilarityToSessionMean,
+    distinctModelsInWindow,
+    promptText,
     promptPreview: promptText.slice(0, 280),
     responsePreview: String(replyText || "").slice(0, 160),
   };
@@ -102,4 +140,5 @@ function buildEventRecord(req, body, replyText, latencyMs) {
 
 module.exports = {
   buildEventRecord,
+  buildSessionId,
 };

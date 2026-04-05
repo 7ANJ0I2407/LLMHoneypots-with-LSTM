@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-04-04T23:21:29.333Z",
+  "source": {
+    "benign_runs_dir": "benign_runs",
+    "alerts_log": "logs/alerts.jsonl",
+    "raw_events_log": "logs/raw_events.jsonl"
+  },
+  "runs": [
+    {
+      "file": "benign_runs/calibration_run.json",
+      "session_id": "realbenign_1775342680040",
+      "runtime_session_ids": [
+        "ac2569071f652a3b",
+        "e73362c648999853"
+      ],
+      "request_count": 1000,
+      "successful_requests": 1000,
+      "runtime_events": 0,
+      "runtime_detection_events": 0,
+      "runtime_scored_events": 0,
+      "runtime_timeout_events": 0,
+      "alerts_total": 0,
+      "alerted_events_any": 0,
+      "alerted_events_model": 0,
+      "alerted_events_novelty": 0,
+      "novelty_alerts": 0,
+      "model_alerts": 0,
+      "fp_rate_any_alert": 0,
+      "fp_rate_model_alert": 0,
+      "fp_rate_novelty_alert": 0
+    },
+    {
+      "file": "benign_runs/run_latest.json",
+      "session_id": "realbenign_1775344843278",
+      "runtime_session_ids": [
+        "315b9e899df984d8",
+        "4096c7af1fce8f07",
+        "0d7e6d7e910c7c88"
+      ],
+      "request_count": 200,
+      "successful_requests": 200,
+      "runtime_events": 200,
+      "runtime_detection_events": 200,
+      "runtime_scored_events": 200,
+      "runtime_timeout_events": 0,
+      "alerts_total": 200,
+      "alerted_events_any": 200,
+      "alerted_events_model": 200,
+      "alerted_events_novelty": 200,
+      "novelty_alerts": 200,
+      "model_alerts": 200,
+      "fp_rate_any_alert": 1,
+      "fp_rate_model_alert": 1,
+      "fp_rate_novelty_alert": 1
+    }
+  ]
+}
